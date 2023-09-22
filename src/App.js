@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from './pages/Login';
+import './styles/reset.css'
+import './styles/base.css'
+
+import Router from "./router";
+import userService from './services/userService';
 
 function App() {
+  userService.validateAth()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{height: "100%"}}>
+      <Router></Router>
     </div>
   );
 }
