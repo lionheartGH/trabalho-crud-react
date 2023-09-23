@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FormControlLabel, Checkbox } from "@mui/material";
 import '../../styles/login.css'
 
 import userService from "../../services/userService";
@@ -9,6 +10,12 @@ export default function Login() {
     const [darkMode, setDarkMode] = useState((sessionStorage.getItem("dark") === "true" ? true : false) || false)
     const [showError, setShowError] = useState('')
     const [showLoading, setShowLoading] = useState(false)
+    const [rememberMe, setRememberMe] = useState((localStorage.getItem("rememberMe") === "true" ? true : false) || false)
+
+    if(localStorage.getItem("rememberMe") === null){
+        localStorage.setItem("rememberMe", false)
+        setRememberMe(false)
+    }
 
     const toggleDark = () => {
         sessionStorage.setItem("dark", !darkMode)
@@ -31,9 +38,9 @@ export default function Login() {
         userService.auth(email, password)
         .then(response => {
             console.log(response)
-            userService.saveAuthInfo(response.data.usuario, response.data.token)
             setShowLoading(true)
             setTimeout(() => {
+                userService.saveAuthInfo(response.data.usuario, response.data.token)
                 sessionStorage.setItem("dark", darkMode)
                 window.location="/"
             }, 1000)
@@ -63,7 +70,6 @@ export default function Login() {
                     <div className="logo"
                         style={{ color: darkMode ? "#fff" : "#000" }}>
                         <h1>𝕏</h1>
-                        <h2 style={{fontSize: "10px"}}>{email + password}</h2>
                     </div>
                     <div className="error"
                         style={{ backgroundColor: darkMode ? "#5e3131" : "#ff9494", color: darkMode ? "rgba(255,255,255,255.8)" : "rgba(0,0,0,0.8)",
@@ -100,6 +106,14 @@ export default function Login() {
                                 setShowError("")
                             }}
                         />
+                    </div>
+                    <div className="rm-div">
+                        <FormControlLabel id="rm-label" sx={{color: darkMode ? "white" : "black"}} control={<Checkbox id="rm-checkbox"
+                        sx={{color: darkMode ? "white" : "black", '&.Mui-checked': {color: darkMode ? "white" : "black"}}}
+                        onChange={() => {
+                            localStorage.setItem("rememberMe", !rememberMe)
+                            setRememberMe(!rememberMe)
+                        }}/>} label="Lembrar de mim" />
                     </div>
                     <div className="login-bt">
                         <button type="button" className="btn btn-dark login-bt" id="login-bt"
