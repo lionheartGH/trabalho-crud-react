@@ -1,5 +1,8 @@
+import * as React from 'react';
 import { useState } from "react";
-import { FormControlLabel, Checkbox } from "@mui/material";
+import { FormControlLabel, Checkbox, TextField, InputAdornment, IconButton, FilledInput, InputLabel, FormControl } from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import '../../styles/login.css'
 
 import userService from "../../services/userService";
@@ -11,11 +14,18 @@ export default function Login() {
     const [showError, setShowError] = useState('')
     const [showLoading, setShowLoading] = useState(false)
     const [rememberMe, setRememberMe] = useState((localStorage.getItem("rememberMe") === "true" ? true : false) || false)
+    const [showPassword, setShowPassword] = useState(false);
 
-    if(localStorage.getItem("rememberMe") === null){
+    if (localStorage.getItem("rememberMe") === null) {
         localStorage.setItem("rememberMe", false)
         setRememberMe(false)
     }
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const toggleDark = () => {
         sessionStorage.setItem("dark", !darkMode)
@@ -36,19 +46,19 @@ export default function Login() {
             return
         }
         userService.auth(email, password)
-        .then(response => {
-            console.log(response)
-            setShowLoading(true)
-            setTimeout(() => {
-                userService.saveAuthInfo(response.data.usuario, response.data.token)
-                sessionStorage.setItem("dark", darkMode)
-                window.location="/"
-            }, 1000)
-        })
-        .catch(error => {
-            console.log(error)
-            setShowError('auth')
-        })
+            .then(response => {
+                console.log(response)
+                setShowLoading(true)
+                setTimeout(() => {
+                    userService.saveAuthInfo(response.data.usuario, response.data.token)
+                    sessionStorage.setItem("dark", darkMode)
+                    window.location = "/"
+                }, 1000)
+            })
+            .catch(error => {
+                console.log(error)
+                setShowError('auth')
+            })
     }
 
     return (
@@ -72,9 +82,11 @@ export default function Login() {
                         <h1>𝕏</h1>
                     </div>
                     <div className="error"
-                        style={{ backgroundColor: darkMode ? "#5e3131" : "#ff9494", color: darkMode ? "rgba(255,255,255,255.8)" : "rgba(0,0,0,0.8)",
-                        display: showError !== "" ? "flex" : "none",
-                        height: showError === "noText" ? "40px" : "30px"}}>
+                        style={{
+                            backgroundColor: darkMode ? "#5e3131" : "#ff9494", color: darkMode ? "rgba(255,255,255,255.8)" : "rgba(0,0,0,0.8)",
+                            display: showError !== "" ? "flex" : "none",
+                            height: showError === "noText" ? "40px" : "30px"
+                        }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             className="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -82,47 +94,86 @@ export default function Login() {
                                 d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                         </svg>
                         <i id="error-msg">{
-                        showError === "auth" ? 'Usuário ou senha inválidos'
-                        : (showError === "noEmail" ? "Por favor, digite um e-mail válido."
-                        : (showError === "noPassword" ? "Por favor, digite uma senha válida."
-                        : "Por favor, digite um e-mail e senha válidos."))}</i>
+                            showError === "auth" ? 'Usuário ou senha inválidos'
+                                : (showError === "noEmail" ? "Por favor, digite um e-mail válido."
+                                    : (showError === "noPassword" ? "Por favor, digite uma senha válida."
+                                        : "Por favor, digite um e-mail e senha válidos."))}</i>
                     </div>
                     <div className="email-input">
-                        <label htmlFor="email" style={{ color: darkMode ? "#fff" : "#000" }}>E-mail:</label>
-                        <input id="email" type="email" placeholder="exemplo@exemplo.com"
-                            style={{ color: darkMode ? "#fff" : "#000", backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1" }}
+                        <TextField label="E-mail" variant="filled" size="small" fullWidth
+                            sx={{
+                                input: {
+                                    color: darkMode ? "#fff" : "#000",
+                                    backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1",
+                                },
+                                label: { color: darkMode ? "rgba(255,255,255, 0.6)" : "rgba(0,0,0, 0.6)" }
+                            }}
                             onChange={(e) => {
                                 setEmail(e.target.value)
-                                setShowError("")   
-                            }}
-                        />
-                    </div>
-                    <div className="password-input">
-                        <label htmlFor="password" style={{ color: darkMode ? "#fff" : "#000" }}>Senha:</label>
-                        <input id="password" type="password" placeholder="Digite sua senha"
-                            style={{ color: darkMode ? "#fff" : "#000", backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1" }}
-                            onChange={(e) => {
-                                setPassword(e.target.value)
                                 setShowError("")
                             }}
                         />
                     </div>
+                    <div className="password-input">
+                        <FormControl fullWidth variant="filled" size="small"
+                            sx={{
+                                input: {
+                                    color: darkMode ? "#fff" : "#000",
+                                    backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1",
+                                },
+                                label: { color: darkMode ? "rgba(255,255,255, 0.6)" : "rgba(0,0,0, 0.6)" },
+                                '.MuiInputBase-root': {
+                                    color: darkMode ? "#fff" : "#000",
+                                    backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1",
+                                    borderTopRightRadius: '0px'
+                                },
+                                ".MuiFilledInput-root:hover": {
+                                    backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1"
+                                },
+                                ".css-zs07ro-MuiInputBase-root-MuiFilledInput-root.Mui-focused": {
+                                    backgroundColor: darkMode ? "#4f4f4f" : "#d1d1d1"
+                                }
+                            }}
+                        >
+                            <InputLabel htmlFor="pw-input">Senha</InputLabel>
+                            <FilledInput
+                                id='pw-input'
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                onChange={(e) => {
+                                    setPassword(e.target.value)
+                                    setShowError("")
+                                }}
+                            />
+                        </FormControl>
+                    </div>
                     <div className="rm-div">
-                        <FormControlLabel id="rm-label" sx={{color: darkMode ? "white" : "black"}} control={<Checkbox id="rm-checkbox"
-                        sx={{color: darkMode ? "white" : "black", '&.Mui-checked': {color: darkMode ? "white" : "black"}}}
-                        onChange={() => {
-                            localStorage.setItem("rememberMe", !rememberMe)
-                            setRememberMe(!rememberMe)
-                        }}/>} label="Lembrar de mim" />
+                        <FormControlLabel id="rm-label" sx={{ color: darkMode ? "white" : "black" }} control={<Checkbox id="rm-checkbox"
+                            sx={{ color: darkMode ? "white" : "black", '&.Mui-checked': { color: darkMode ? "white" : "black" } }}
+                            onChange={() => {
+                                localStorage.setItem("rememberMe", !rememberMe)
+                                setRememberMe(!rememberMe)
+                            }} />} label="Lembrar de mim" />
                     </div>
                     <div className="login-bt">
                         <button type="button" className="btn btn-dark login-bt" id="login-bt"
-                        style={{ boxShadow: darkMode ? "0 0 3px 1px rgba(255, 255, 255, 0.8)" : "0 0 3px 1px rgba(0, 0, 0, 0.8)" }}
-                        onClick={Enter}
+                            style={{ boxShadow: darkMode ? "0 0 3px 1px rgba(255, 255, 255, 0.8)" : "0 0 3px 1px rgba(0, 0, 0, 0.8)" }}
+                            onClick={Enter}
                         >Entrar</button>
                     </div>
                 </div>
-                <div className="loading" style={{display: showLoading ? "block" : "none"}}>
+                <div className="loading" style={{ display: showLoading ? "block" : "none" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
                         style={{ margin: "auto", background: "none", display: "block", shapeRendering: "auto" }} width="200px"
                         height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
