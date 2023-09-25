@@ -1,0 +1,19 @@
+.cadastrations-info-root {
+    display: flex;
+    flex-direction: column;
+}
+
+.products-info-root {
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastrations-info-root>i,
+.products-info-root>i {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#add-bt-home {
+    width: 100%;
+}

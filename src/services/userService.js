@@ -1,5 +1,6 @@
 import service from "./service";
 
+//Trocar senha para password retorna bad request
 function auth(email, senha) {
     return new Promise((resolve, reject) => {
         service.post('/login', { email, senha })
@@ -42,6 +43,7 @@ function logout() {
         sessionStorage.removeItem('user')
         sessionStorage.removeItem('token')
     }
+    localStorage.setItem("rememberMe", false)
     directToLogin()
 }
 

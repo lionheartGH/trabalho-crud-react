@@ -1,0 +1,188 @@
+.container-root {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: auto
+}
+
+.topbar {
+    height: 50px;
+    box-shadow: 0 0 3px 1px rgba(var(--lightmode-shadow), 0.8);
+    width: 100%;
+}
+
+.navbar-collapse {
+    justify-content:space-between;
+}
+
+.logout {
+    transform: scale(1.3,1.3);
+    margin-right: 10px;
+    float: right;
+}
+
+.loggedUser {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+table.table {
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+button.btn{
+    min-width: 80px;
+    margin-right: 3px;
+}
+
+.add-bt-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-bt {
+    width: 80px;
+    margin-left: 11px !important;
+}
+
+button.btn.edit-trash {
+    min-width: 0px;
+
+}
+
+.alert-top {
+    width: 300px;
+    font-size: 16px;
+    padding-bottom: 5px;
+    background-color: var(--main-color);
+    margin-top: 10px;
+}
+
+.swal2-icon {
+    transform: scale(0.3,0.3);
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--main-color);
+    top: -25px;
+}
+
+.swal2-title {
+    font-size: 14px;
+    color: white;
+    top: -45px;
+}
+
+.swal2-success-circular-line-left {
+    background-color: var(--main-color) !important
+}
+
+.swal2-container {
+    padding: 0;
+}
+
+.swal2-popup {
+    height: 75px;
+}
+
+.modal-content input {
+    border-radius: 0px;
+    border: 0px;
+}
+
+#shopping {
+    width: 77px;
+}
+
+.modal-content input:focus {
+    border: 0px;
+}
+
+#save-bt {
+    border: 0px;
+}
+
+#save-bt:active, #cancel-bt:active {
+    transform: scale(0.98,0.98);
+}
+
+#cancel-bt {
+    border: 0px;
+    background-color: transparent;
+}
+
+#cancel-bt:hover {
+    border: 0px;
+    background-color: #d3d4d5;
+    color: black;
+}
+
+.error {
+    display: none;
+    background-color: #5e3131;
+    border: solid rgba(0, 0, 0, 0.3);
+    border-width: 1px;
+    border-radius: 5px;
+    height: 40px;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: small;
+    margin-bottom: 5px;
+    margin-left: 14px;
+    margin-right: 14px;
+    margin-top: 10px;
+}
+
+.bi-info-circle {
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.filter-div {
+    display: flex;
+    justify-content:space-between;
+}
+
+.filter {
+    width: 250px;
+    border: 0px;
+    border-radius: 0px !important;
+}
+
+.filter-icon {
+    border: 0px;
+    border-radius: 0px !important;
+}
+
+.form-control {
+    border-radius: 0px;
+    border: 0px;
+    background-color: #efefef;
+}
+
+.bi-moon, .bi-sun {
+    user-select: none;
+    transform: scale(1.2,1.2);
+    position: relative;
+    display: none;
+}
+
+.bi-moon:hover, .bi-sun:hover {
+    cursor: pointer;
+    transform: scale(1.3,1.3);
+}
+
+.toggle-dark {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.cadastros {
+    background-color: #e7e7e7;
+    border-radius: 50px;
+}

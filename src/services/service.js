@@ -5,8 +5,14 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
-    config.headers.Authorization = localStorage.getItem("token")
-    return config
+    let token
+    if (localStorage.getItem("token") === null) {
+        config.headers.Authorization = sessionStorage.getItem("token")
+        return config
+    } else {
+        config.headers.Authorization = localStorage.getItem("token")
+        return config
+    }
 })
 
 export default service

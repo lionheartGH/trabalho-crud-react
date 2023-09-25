@@ -161,6 +161,7 @@ export default function Login() {
                     <div className="rm-div">
                         <FormControlLabel id="rm-label" sx={{ color: darkMode ? "white" : "black" }} control={<Checkbox id="rm-checkbox"
                             sx={{ color: darkMode ? "white" : "black", '&.Mui-checked': { color: darkMode ? "white" : "black" } }}
+                            checked={localStorage.getItem("rememberMe") === "true"}
                             onChange={() => {
                                 localStorage.setItem("rememberMe", !rememberMe)
                                 setRememberMe(!rememberMe)

@@ -1,4 +1,3 @@
-import Login from './pages/Login';
 import './styles/reset.css'
 import './styles/base.css'
 

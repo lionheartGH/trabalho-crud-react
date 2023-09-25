@@ -1,0 +1,78 @@
+.navbar-root {
+    background-color: #bdbdbd;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+    box-shadow: 0 0 3px 1px rgba(var(--lightmode-shadow), 0.8);
+    position:sticky;
+    z-index: 2;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: black;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.logo-navbar {
+    font-size: 40px;
+    margin: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.page-item>a {
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+    font-weight: 300;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.page-item>a:hover {
+    background-color: #dcdcdc;
+}
+
+.logout {
+    margin-right: 10px;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.logout>a {
+    color: black;
+}
+
+.logout>a:hover {
+    color: red;
+}
+
+.logout:has(a:hover) {
+    background-color: #dcdcdc;
+}
+
+.loggedUser {
+    color: black;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.toggle-dark-navbar {
+    position: relative;
+    margin: 0px;
+    margin-right: 15px;
+}
+
+.avatar {
+    margin-right: 5px;
+}
